@@ -13,6 +13,7 @@ import { InMemoryDocumentGateway } from "../adapters/secondary/InMemoryDocumentG
 import { InMemoryPeConnectGateway } from "../adapters/secondary/PeConnectGateway/InMemoryPeConnectGateway";
 import { InMemoryPoleEmploiGateway } from "../adapters/secondary/InMemoryPoleEmploiGateway";
 import { InMemorySireneGateway } from "../adapters/secondary/InMemorySireneGateway";
+import { InMemoryExportGateway } from "../adapters/secondary/reporting/InMemoryExportGateway";
 import { InMemoryReportingGateway } from "../adapters/secondary/reporting/InMemoryReportingGateway";
 import {
   GenerateApiConsumerJtw,
@@ -32,6 +33,7 @@ export type InMemoryGateways = {
   getFeatureFlags: GetFeatureFlags;
   documentGateway: InMemoryDocumentGateway;
   reportingGateway: InMemoryReportingGateway;
+  exportGateway: InMemoryExportGateway;
 };
 
 // following function only to type check that InMemoryRepositories is assignable to Repositories :

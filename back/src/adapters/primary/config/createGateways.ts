@@ -29,12 +29,15 @@ import { InMemorySireneGateway } from "../../secondary/InMemorySireneGateway";
 import { MinioDocumentGateway } from "../../secondary/MinioDocumentGateway";
 import { ExcelReportingGateway } from "../../secondary/reporting/ExcelReportingGateway";
 import { InMemoryReportingGateway } from "../../secondary/reporting/InMemoryReportingGateway";
-import { AppConfig, makeEmailAllowListPredicate } from "./appConfig";
+import { AppConfig } from "./appConfig";
 import {
   httpPeConnectGatewayTargetMapperMaker,
   onRejectPeSpecificResponseInterceptorMaker,
   peConnectApiErrorsToDomainErrors,
 } from "../../secondary/PeConnectGateway/HttpPeConnectGateway.config";
+import { ExcelExportGateway } from "../../secondary/reporting/ExcelExportGateway";
+import { InMemoryExportGateway } from "../../secondary/reporting/InMemoryExportGateway";
+import { makeEmailAllowListPredicate } from "../../primary/config/appConfig";
 
 const logger = createLogger(__filename);
 
@@ -135,6 +138,10 @@ export const createGateways = async (config: AppConfig, clock: Clock) => {
             noRetries,
           )
         : new InMemorySireneGateway(),
+    exportGateway:
+      config.reporting === "EXCEL"
+        ? new ExcelExportGateway()
+        : new InMemoryExportGateway(),
   };
 };
 
