@@ -27,8 +27,6 @@ import { InMemoryPeConnectGateway } from "../../secondary/PeConnectGateway/InMem
 import { InMemoryPoleEmploiGateway } from "../../secondary/InMemoryPoleEmploiGateway";
 import { InMemorySireneGateway } from "../../secondary/InMemorySireneGateway";
 import { MinioDocumentGateway } from "../../secondary/MinioDocumentGateway";
-import { ExcelReportingGateway } from "../../secondary/reporting/ExcelReportingGateway";
-import { InMemoryReportingGateway } from "../../secondary/reporting/InMemoryReportingGateway";
 import { AppConfig } from "./appConfig";
 import {
   httpPeConnectGatewayTargetMapperMaker,
@@ -125,10 +123,6 @@ export const createGateways = async (config: AppConfig, clock: Clock) => {
             noRetries,
           )
         : new InMemoryPoleEmploiGateway(),
-    reportingGateway:
-      config.reporting === "EXCEL"
-        ? new ExcelReportingGateway()
-        : new InMemoryReportingGateway(),
     sirene:
       config.sireneGateway === "HTTPS"
         ? new HttpsSireneGateway(
